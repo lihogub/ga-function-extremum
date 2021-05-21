@@ -4,7 +4,7 @@ import ga.chromosome.Chromosome
 import ga.chromosome.ChromosomeImpl
 import kotlin.random.Random
 
-class SimpleMutationOperator : MutationOperator() {
+class SimpleMutation : Mutation() {
     override fun mutate(chromosome: Chromosome): Chromosome {
         val newChromosome = ChromosomeImpl(chromosome)
         val chromosomeLength = chromosome.getLength()

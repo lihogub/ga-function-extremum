@@ -2,10 +2,10 @@ package ga.chromosome
 
 import ga.gene.Gene
 
-interface Chromosome {
-    fun getLength(): Int
-    fun getGenome(): List<Gene>
-    fun setGenome(genome: List<Gene>)
-    fun getGene(index: Int): Gene
-    fun setGene(index: Int, gene: Gene)
+abstract class Chromosome {
+    abstract fun getLength(): Int
+    abstract fun getGenome(): List<Gene>
+    abstract fun setGenome(genome: List<Gene>)
+    abstract fun getGene(index: Int): Gene
+    abstract fun setGene(index: Int, gene: Gene)
 }
