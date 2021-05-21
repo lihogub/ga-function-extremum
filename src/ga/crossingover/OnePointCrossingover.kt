@@ -4,7 +4,7 @@ import ga.chromosome.Chromosome
 import ga.chromosome.ChromosomeImpl
 import kotlin.random.Random
 
-class SimpleCrossingover : Crossingover() {
+class OnePointCrossingover : Crossingover() {
     override fun crossingover(chromosomeA: Chromosome, chromosomeB: Chromosome): Chromosome {
         val chromosomeLength = chromosomeA.getLength()
         val splitPoint = Random.nextInt(0, chromosomeLength)
