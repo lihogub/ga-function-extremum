@@ -10,7 +10,7 @@ class GoldenRatioCrossingover : Crossingover() {
         val exchangePoint =
             if (Random.nextBoolean()) (chromosomeLength / 1.61803).toInt() else (chromosomeLength / 0.61803).toInt()
         val newChromosome = ChromosomeImpl(chromosomeA)
-        for (i in exchangePoint..chromosomeLength)
+        for (i in exchangePoint until chromosomeLength)
             newChromosome.setGene(i, chromosomeB.getGene(i))
         return newChromosome
     }
