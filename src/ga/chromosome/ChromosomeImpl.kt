@@ -3,7 +3,7 @@ package ga.chromosome
 import ga.gene.Gene
 import ga.gene.BinaryGene
 
-class ChromosomeImpl() : Chromosome {
+class ChromosomeImpl() : Chromosome() {
     private val genomeLength: Int = 32
     private var genome = MutableList<Gene>(genomeLength) { BinaryGene(false) }
 
