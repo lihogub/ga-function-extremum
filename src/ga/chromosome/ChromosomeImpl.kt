@@ -20,4 +20,22 @@ class ChromosomeImpl() : Chromosome() {
     override fun setGene(index: Int, gene: Gene) { this.genome[index] = BinaryGene(gene) }
 
     override fun toString(): String = "Chromosome #${this.hashCode().toString(16)} ${this.getGenome()}"
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as ChromosomeImpl
+        if (genomeLength != other.genomeLength) return false
+        genome.zip(other.genome).forEach{p->if (p.first != p.second) return false}
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = genomeLength
+        result = 31 * result + genome.hashCode()
+        return result
+    }
+
+
 }
