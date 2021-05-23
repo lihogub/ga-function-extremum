@@ -1,9 +1,9 @@
-package ga.comparator
+package ga.distance
 
 import ga.chromosome.Chromosome
 
-class HammingComparator : Comparator() {
-    override fun compare(chromosomeA: Chromosome, chromosomeB: Chromosome): Int {
+class HammingDistance : Distance() {
+    override fun distance(chromosomeA: Chromosome, chromosomeB: Chromosome): Int {
         val genomeA = chromosomeA.getGenome()
         val genomeB = chromosomeB.getGenome()
         var distance = 0
