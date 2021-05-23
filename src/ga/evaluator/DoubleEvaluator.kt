@@ -3,7 +3,7 @@ package ga.evaluator
 import ga.chromosome.Chromosome
 import kotlin.math.pow
 
-class DoubleEvaluator(val targetFunction: (Chromosome) -> Double) : Evaluator() {
+class DoubleEvaluator(private val targetFunction: (Double) -> Double) : Evaluator() {
     override fun evaluate(chromosome: Chromosome): Double {
         var value = 0.0
         val genomeOffset = chromosome.getLength() / 2
