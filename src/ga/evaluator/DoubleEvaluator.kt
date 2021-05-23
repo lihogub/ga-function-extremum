@@ -3,7 +3,7 @@ package ga.evaluator
 import ga.chromosome.Chromosome
 import kotlin.math.pow
 
-class DoubleEvaluator : Evaluator() {
+class DoubleEvaluator(val targetFunction: (Chromosome) -> Double) : Evaluator() {
     override fun evaluate(chromosome: Chromosome): Double {
         var value = 0.0
         val genomeOffset = chromosome.getLength() / 2
@@ -11,5 +11,9 @@ class DoubleEvaluator : Evaluator() {
         Array(genome.size) {i -> i}
             .forEach { i -> if (genome[i].getState()) value += 2.0.pow(genomeOffset - i.toDouble()) }
         return value
+    }
+
+    override fun evaluate(population: List<Chromosome>): Double {
+        return population.map {c -> evaluate(c)}.average()
     }
 }
