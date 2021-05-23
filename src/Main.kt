@@ -1,14 +1,13 @@
 import ga.chromosome.Chromosome
 import ga.chromosome.ChromosomeImpl
+import ga.crossingover.OnePointCrossingover
+import ga.crossingover.UniversalCrossingover
 import ga.mutation.Mutation
 import ga.mutation.SimpleMutation
 
 fun main() {
-    var c: Chromosome = ChromosomeImpl()
-    val smo: Mutation = SimpleMutation(0.5)
-    for (i in 0..10000) {
-        c = smo.mutate(c)
-        println(c)
-    }
+    val c1: Chromosome = ChromosomeImpl()
+    val c2: Chromosome = ChromosomeImpl()
+    UniversalCrossingover().crossingover(c1, c2)
 
 }
