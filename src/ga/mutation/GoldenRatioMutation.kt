@@ -8,7 +8,8 @@ class GoldenRatioMutation : Mutation() {
     override fun mutate(chromosome: Chromosome): Chromosome {
         val chromosomeLength = chromosome.getLength()
         val exchangePoint =
-            if (Random.nextBoolean()) (chromosomeLength / 1.61803).toInt() else (chromosomeLength / 0.61803).toInt()
+            if (Random.nextBoolean()) (chromosomeLength / 1.61803).toInt()
+            else (chromosomeLength - chromosomeLength / 1.61803).toInt()
         val geneA = chromosome.getGene(exchangePoint)
         val geneB = chromosome.getGene(exchangePoint + 1)
         val newChromosome = ChromosomeImpl(chromosome)
