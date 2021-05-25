@@ -2,10 +2,19 @@ package ga.chromosome
 
 import ga.gene.Gene
 import ga.gene.BinaryGene
+import kotlin.random.Random
 
 class ChromosomeImpl() : Chromosome() {
     private val genomeLength: Int = 32
-    private var genome = MutableList<Gene>(genomeLength) { BinaryGene(false) }
+    private var genome = MutableList<Gene>(genomeLength) { BinaryGene(Random.nextBoolean()) }
+
+    constructor(value: Int): this() {
+        var tmpValue = value
+        for (i in 0..31) {
+            this.setGene(i, BinaryGene(tmpValue % 2 == 1))
+            tmpValue /= 2;
+        }
+    }
 
     constructor(chromosome: Chromosome) : this() { this.setGenome(chromosome.getGenome()) }
 
