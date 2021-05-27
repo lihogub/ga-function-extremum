@@ -14,6 +14,8 @@ import ga.mutation.SimpleMutation
 import ga.selector.InbreedingPartnerSelector
 import ga.selector.ProportionalSelector
 import ga.selector.RandomPartnerSelector
+import ga.spawner.BlanketSpawner
+import ga.spawner.ShotgunSpawner
 import kotlin.math.abs
 import kotlin.math.round
 import kotlin.math.sin
@@ -25,10 +27,14 @@ fun main() {
     val ev = Evolution(
         rounds = 100,
         populationSize = 10,
-        crossingoverProb = 0.45,
-        mutationProb = 0.45,
+        crossingoverProb = 0.7,
+        mutationProb = 0.2,
         evaluator = evaluator,
         selector = ProportionalSelector(evaluator),
+        spawnerList = listOf(
+            BlanketSpawner(),
+            ShotgunSpawner()
+        ),
         crossingoverList = listOf(
             GoldenRatioCrossingover(),
             OnePointCrossingover(),
@@ -46,6 +52,5 @@ fun main() {
     )
 
     ev.start()
-
 
 }
