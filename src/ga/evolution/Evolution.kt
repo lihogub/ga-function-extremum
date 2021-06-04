@@ -1,13 +1,12 @@
 package ga.evolution
 
 import ga.chromosome.Chromosome
-import ga.chromosome.ChromosomeImpl
 import ga.crossingover.Crossingover
 import ga.evaluator.Evaluator
+import ga.logger.Logger
 import ga.mutation.Mutation
 import ga.selector.PartnerSelector
 import ga.selector.Selector
-import ga.spawner.BlanketSpawner
 import ga.spawner.Spawner
 import kotlin.random.Random
 
@@ -20,7 +19,10 @@ class Evolution(private val spawnerList: List<Spawner>,
                 private val crossingoverProb: Double,
                 private val mutationProb: Double,
                 private val rounds: Int,
-                private val populationSize: Int) {
+                private val populationSize: Int,
+                private val logger: Logger) {
+
+
 
     private fun getTransformType(): Int {
         val randValue = Random.nextDouble()
@@ -35,6 +37,7 @@ class Evolution(private val spawnerList: List<Spawner>,
         val newPopulation = mutableListOf<Chromosome>()
         val populationSize = oldPopulation.size
         for (i in 0 until populationSize) {
+            if (i % (populationSize/100 + 1) == 0) print("#")
             val firstChromosome = selector.select(oldPopulation)
             val newChromosome = when (getTransformType()) {
                 2 -> {
@@ -54,11 +57,20 @@ class Evolution(private val spawnerList: List<Spawner>,
     }
 
     fun start() {
-        var np: List<Chromosome> = spawnerList.random().spawn(populationSize)
+        var population: List<Chromosome> = spawnerList.random().spawn(populationSize)
+        logger.log(population)
         for (i in 1..rounds) {
-            np = this.getNewPopulation(np)
-            println("$i avg: ${evaluator.average(np)}, min: ${evaluator.min(np)} max: ${evaluator.max(np)}")
+            population = this.getNewPopulation(population)
+            logger.log(population)
+            println("\n$i avg: ${evaluator.average(population)}, " +
+                    "median: ${evaluator.median(population)} " +
+                    "min: ${evaluator.min(population)} " +
+                    "max: ${evaluator.max(population)}")
         }
-        println("Minimum is ${evaluator.min(np)}.")
+        val minChromosome = population.minByOrNull { c -> evaluator.evaluate(c) }!!
+        val minX = evaluator.toValue(minChromosome)
+        val minY = evaluator.evaluate(minChromosome)
+        println("Minimum X=${minX}, Y=${minY}.")
+        logger.saveCSV()
     }
 }
