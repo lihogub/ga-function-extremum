@@ -12,7 +12,7 @@ class ChromosomeImpl() : Chromosome() {
         var tmpValue = value
         for (i in 0..31) {
             this.setGene(i, BinaryGene(tmpValue % 2 == 1))
-            tmpValue /= 2;
+            tmpValue /= 2
         }
     }
 
